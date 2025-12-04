@@ -1,0 +1,109 @@
+{
+  "info": {
+    "name": "Bid.ai Donor Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Collection to test Donor & Donation APIs (Next.js + Prisma)"
+  },
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "donorId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Donor - Create (POST)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test Donor\",\n  \"email\": \"test@example.com\",\n  \"phone\": \"9999999999\",\n  \"age\": 30,\n  \"address\": \"Delhi, India\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/donor/create",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api","donor","create"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Donor - Get by ID (GET)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/donor/{{donorId}}",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api","donor","{{donorId}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Donation - Create (POST)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"donorId\": {{donorId}},\n  \"amount\": 500.0,\n  \"paymentMode\": \"UPI\",\n  \"onBehalfOf\": \"Self\",\n  \"message\": \"Best wishes\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/donation/create",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api","donation","create"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Donation - Get by Donor (GET)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/donation/{{donorId}}",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api","donation","{{donorId}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin - Donors (GET)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/admin/donors",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api","admin","donors"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin - Donations Total (GET)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/admin/donations/total",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api","admin","donations","total"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
