@@ -39,9 +39,17 @@ export default function DonorLoginSection({ backgroundImage = "/Forest.jpg" }: D
       if (!res.ok) throw new Error(result.error);
       return result;
     },
+    // onSuccess: () => {
+    //   setMessage("✅ Login successful!");
+    //   router.push("/");
+    // },
     onSuccess: () => {
       setMessage("✅ Login successful!");
-      router.push("/");
+
+      setTimeout(() => {
+        router.push("/");
+        router.refresh();
+      }, 300);
     },
     onError: (err: any) => {
       setMessage("❌ " + err.message);
@@ -67,11 +75,11 @@ export default function DonorLoginSection({ backgroundImage = "/Forest.jpg" }: D
         {/* FORM */}
         <section className="relative z-30 max-w-[1340px] mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between gap-6 items-stretch">
-            
+
             {/* LEFT FORM CARD */}
             <Card className="bg-green-50 border-green-200 min-h-[360px] md:w-1/2">
               <CardContent className="pt-6 flex flex-col gap-4">
-                
+
                 <div>
                   <Label>Email</Label>
                   <Input
