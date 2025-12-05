@@ -1,34 +1,17 @@
-// app/api/auth/login/route.ts
+// api/auth/login/route/ts
 import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
-import prisma from "@/lib/prisma";
-import { signToken, createTokenCookie } from "@/lib/auth";
+import { supabaseServer } from "@/lib/supabase/server";
 
 export async function POST(req: Request) {
-  try {
-    const { email, password } = await req.json();
-    if (!email || !password) {
-      return NextResponse.json({ error: "Email and password required" }, { status: 400 });
-    }
+  const body = await req.json();
+  const { email, password } = body;
 
-    const user = await prisma.donor.findUnique({ where: { email } });
-    if (!user || !user.password) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
-    }
+  const supabase = await supabaseServer();
 
-    const isValid = await bcrypt.compare(password, user.password);
-    if (!isValid) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
-    }
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
-    const token = signToken({ id: user.id });
-    const cookie = createTokenCookie(token);
-
-    const safeUser = { id: user.id, name: user.name, email: user.email, phone: user.phone };
-
-    return NextResponse.json({ user: safeUser }, { status: 200, headers: { "Set-Cookie": cookie } });
-  } catch (err) {
-    console.error("LOGIN ERROR", err);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
+  return NextResponse.json({ user: data.user }, { status: 200 });
 }

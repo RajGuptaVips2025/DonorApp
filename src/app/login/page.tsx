@@ -1,3 +1,7 @@
+// src/app/login/page.tsx
+
+"use client";
+
 import DonorLoginSection from "@/Components/DonorLoginSection";
 import Footer from "@/Components/Footer";
 import Hero from "@/Components/Hero";

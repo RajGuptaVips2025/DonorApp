@@ -1,44 +1,35 @@
-// app/api/auth/signup/route.ts
+// api/auth/signup/route.ts
 import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
-import prisma from "@/lib/prisma";
-import { signToken, createTokenCookie } from "@/lib/auth";
+import { supabaseServer } from "@/lib/supabase/server";
 
 export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const { name, email, password, phone, address, city, state, pin } = body;
+  const body = await req.json();
+  const { email, password, name, phone, address, state, city, pin } = body;
 
-    if (!name || !email || !password) {
-      return NextResponse.json({ error: "Name, email and password are required" }, { status: 400 });
+  const supabase = await supabaseServer();
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { full_name: name, phone }
     }
+  });
 
-    const existing = await prisma.donor.findUnique({ where: { email } });
-    if (existing) {
-      return NextResponse.json({ error: "Email already in use" }, { status: 409 });
-    }
+  if (error) return NextResponse.json({ error: error.message }, { status: 400 });
 
-    const hashed = await bcrypt.hash(password, 10);
-    const fullAddress = [address, city, state, pin].filter(Boolean).join(", ");
-
-    const donor = await prisma.donor.create({
-      data: {
-        name,
-        email,
-        password: hashed,
-        phone,
-        address: fullAddress || null,
-      },
-      select: { id: true, name: true, email: true, phone: true },
+  // insert profile (server side, RLS will allow because auth.user exists now)
+  if (data.user?.id) {
+    await supabase.from("profiles").insert({
+      id: data.user.id,
+      full_name: name,
+      phone,
+      address,
+      state,
+      city,
+      pin
     });
-
-    const token = signToken({ id: donor.id });
-
-    const cookie = createTokenCookie(token);
-
-    return NextResponse.json({ user: donor }, { status: 201, headers: { "Set-Cookie": cookie } });
-  } catch (err: any) {
-    console.error("SIGNUP ERROR", err);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
+
+  return NextResponse.json({ user: data.user }, { status: 200 });
 }
