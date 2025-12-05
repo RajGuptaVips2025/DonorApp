@@ -18,7 +18,6 @@ export async function POST(req: Request) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 400 });
 
-  // insert profile (server side, RLS will allow because auth.user exists now)
   if (data.user?.id) {
     await supabase.from("profiles").insert({
       id: data.user.id,

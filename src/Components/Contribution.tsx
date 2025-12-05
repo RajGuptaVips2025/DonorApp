@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 const contributionSteps = [{ id: 1, title: "You Donate", description: "Choose the number of plants you want to support.", }, { id: 2, title: "We Plant with Local Communities", description: "Our team plants native, drought-resistant species across Bundelkhand.", }, { id: 3, title: "You Receive Geo-Tagged Updates Every 6 Months", description: "See exactly where and how your plants are growing.", }, { id: 4, title: "Track Carbon Sequestration in Your Dashboard", description: "Watch your environmental impact grow over time.", },];
 
@@ -49,11 +50,15 @@ const Contribution = () => {
                             ))}
                         </div>
 
-                        <div className="mt-12 flex justify-start lg:justify-end">
-                            <button className="bg-green-600 text-white font-bold text-lg px-8 py-3 rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300">
-                                Adopt a Plant
-                            </button>
-                        </div>
+                        <Link href="/donate">
+                            <div className="mt-12 flex justify-start lg:justify-end">
+                                <button className="bg-green-600 text-white font-bold text-lg px-8 py-3 rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300">
+                                    Adopt a Plant
+                                </button>
+                            </div>
+                        </Link>
+
+
 
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 const corporatePartners = [
   { id: 1, logoSrc: "/Corporate1.png", logoAlt: "Chirag Connect Logo", title: "Chirag Connect" },
@@ -50,34 +51,36 @@ const Corporate = () => {
         </p>
 
         <div className="relative w-full mb-10 overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-            <div className="flex w-max animate-scroll hover:[animation-play-state:paused]">
-                {corporatePartners.map((partner, index) => (
-                    <div key={`p1-${index}`} className="mx-4 w-[280px] md:w-[320px] shrink-0 h-[220px]">
-                        <CorporateCard 
-                            logoSrc={partner.logoSrc} 
-                            logoAlt={partner.logoAlt} 
-                            title={partner.title} 
-                        />
-                    </div>
-                ))}
+          <div className="flex w-max animate-scroll hover:[animation-play-state:paused]">
+            {corporatePartners.map((partner, index) => (
+              <div key={`p1-${index}`} className="mx-4 w-[280px] md:w-[320px] shrink-0 h-[220px]">
+                <CorporateCard
+                  logoSrc={partner.logoSrc}
+                  logoAlt={partner.logoAlt}
+                  title={partner.title}
+                />
+              </div>
+            ))}
 
-                {corporatePartners.map((partner, index) => (
-                    <div key={`p2-${index}`} className="mx-4 w-[280px] md:w-[320px] shrink-0 h-[220px]">
-                        <CorporateCard 
-                            logoSrc={partner.logoSrc} 
-                            logoAlt={partner.logoAlt} 
-                            title={partner.title} 
-                        />
-                    </div>
-                ))}
-            </div>
+            {corporatePartners.map((partner, index) => (
+              <div key={`p2-${index}`} className="mx-4 w-[280px] md:w-[320px] shrink-0 h-[220px]">
+                <CorporateCard
+                  logoSrc={partner.logoSrc}
+                  logoAlt={partner.logoAlt}
+                  title={partner.title}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="flex justify-center lg:justify-end mb-4">
-          <button className="bg-green-500 hover:bg-green-600 text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg flex items-center transition-all transform hover:scale-105">
-            Start Your CSR Partnership <span className="ml-3 text-2xl">→</span> Join with Us
-          </button>
-        </div>
+        <Link href="/donate">
+          <div className="flex justify-center lg:justify-end mb-4">
+            <button className="bg-green-500 hover:bg-green-600 text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg flex items-center transition-all transform hover:scale-105">
+              Start Your CSR Partnership <span className="ml-3 text-2xl">→</span> Join with Us
+            </button>
+          </div>
+        </Link>
       </div>
 
       <svg className="absolute w-0 h-0">

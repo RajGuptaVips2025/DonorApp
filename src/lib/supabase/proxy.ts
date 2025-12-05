@@ -32,19 +32,15 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  // Validate the user via Supabase
   const { data: { user } } = await supabase.auth.getUser();
 
-  // Define paths
   const url = request.nextUrl.clone();
   const path = url.pathname;
 
-  // 🛑 FIX: Add this block to allow API routes to pass through
   if (path.startsWith("/api") || path.startsWith("/_next") || path.startsWith("/static")) {
     return response;
   }
 
-  // 1. If user is LOGGED IN and tries to access login/signup, redirect to Home
   if (user) {
     if (path === "/login" || path === "/signup") {
       url.pathname = "/"; 
@@ -52,7 +48,6 @@ export async function updateSession(request: NextRequest) {
     }
   }
 
-  // 2. If user is NOT LOGGED IN and tries to access protected routes
   if (!user) {
     const publicPaths = ["/login", "/signup"];
     

@@ -2,7 +2,6 @@
 
 "use client";
 
-import DonorLoginSection from "@/Components/DonorLoginSection";
 import DonorSignUpSection from "@/Components/DonorSignUpSection";
 import Footer from "@/Components/Footer";
 import Hero from "@/Components/Hero";
@@ -18,12 +17,8 @@ export default function Page() {
                 subtitle="JOIN OUR MISSION TO"
                 title="RESTORE BUNDELKHAND"
             />
-
             <div className="h-12 bg-white" />
-
-            {/* <DonorLoginSection backgroundImage="/Forest.jpg" /> */}
             <DonorSignUpSection backgroundImage="/Forest.jpg" />
-
             <Footer />
         </>
     );

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import Image from 'next/image';
 
 const Introduction = () => {
@@ -75,9 +76,14 @@ const Introduction = () => {
                         families, and bring complete transparency to plantation and CSR projects.
                     </p>
                     <div className="mt-8">
-                        <button className="bg-white text-green-700 text-lg font-bold px-10 py-3 rounded-xl shadow-xl hover:bg-gray-100 hover:scale-105 transition-all duration-300">
+
+                        <Link
+                            href="/donate"
+                            className="bg-white text-green-700 text-lg font-bold px-10 py-3 rounded-xl shadow-xl hover:bg-gray-100 hover:scale-105 transition-all duration-300 inline-block rounded-xl"
+                        >
                             Donate Now
-                        </button>
+                        </Link>
+
                     </div>
                 </div>
                 <div className="hidden md:block md:col-span-5" />

@@ -1,5 +1,4 @@
 // src/app/login/page.tsx
-
 "use client";
 
 import DonorLoginSection from "@/Components/DonorLoginSection";
@@ -17,11 +16,8 @@ export default function Page() {
                 subtitle="JOIN OUR MISSION TO"
                 title="RESTORE BUNDELKHAND"
             />
-
             <div className="h-12 bg-white" />
-
             <DonorLoginSection backgroundImage="/Forest.jpg" />
-
             <Footer />
         </>
     );

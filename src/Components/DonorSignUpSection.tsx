@@ -66,23 +66,16 @@ export default function DonorSignUpSection({ backgroundImage = "/Forest.jpg" }: 
       </section>
 
       <div className="relative w-full pb-10">
-
-        {/* Background */}
         <div className="absolute top-0 left-0 w-full h-full z-0">
           <div className="relative w-full h-full overflow-hidden rounded-t-[480px]">
             <Image src={backgroundImage} alt="Background" fill className="object-cover opacity-25" />
             <div className="absolute inset-0 bg-green-500" style={{ opacity: 0.22, mixBlendMode: "multiply" }} />
           </div>
         </div>
-
-        {/* Form */}
         <section className="relative z-30 max-w-[1340px] mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between gap-6">
-
-            {/* LEFT FORM */}
             <Card className="bg-green-50 border-green-200 min-h-[560px] md:w-1/2">
               <CardContent className="pt-6 flex flex-col gap-4">
-
                 {Object.keys(form).map((key) => (
                   <div key={key}>
                     <Label className="text-gray-700">{key.toUpperCase()}</Label>
@@ -94,7 +87,6 @@ export default function DonorSignUpSection({ backgroundImage = "/Forest.jpg" }: 
                     />
                   </div>
                 ))}
-
                 <Button
                   onClick={() => signupMutation.mutate()}
                   disabled={signupMutation.isPending}
@@ -102,14 +94,12 @@ export default function DonorSignUpSection({ backgroundImage = "/Forest.jpg" }: 
                 >
                   {signupMutation.isPending ? "Creating account..." : "Sign Up"}
                 </Button>
-
                 <p className="text-center text-sm mt-4">
                   Already have an account?{" "}
                   <Link href="/login" className="text-green-700 font-semibold hover:underline">
                     Login
                   </Link>
                 </p>
-
                 {message && <p className="text-center mt-3 text-sm font-semibold">{message}</p>}
               </CardContent>
             </Card>
@@ -170,7 +160,6 @@ export default function DonorSignUpSection({ backgroundImage = "/Forest.jpg" }: 
                 </div>
               </CardContent>
             </Card>
-
           </div>
         </section>
       </div>
