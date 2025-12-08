@@ -12,3 +12,19 @@ CREATE TABLE users (
   pin VARCHAR(10) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+CREATE TABLE donations (
+  donation_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  donor_id UUID REFERENCES users(uuid_id) ON DELETE CASCADE,
+
+  amount INTEGER NOT NULL,
+  frequency VARCHAR(20) NOT NULL,
+  impact VARCHAR(50) NOT NULL,
+
+  upi_id VARCHAR(20) NOT NULL,
+  on_behalf VARCHAR(150) NOT NULL,
+  message TEXT NOT NULL,
+
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
