@@ -49,7 +49,7 @@ export default function DonorSection({ backgroundImage = "/Forest.jpg" }) {
 
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:5000/api/donation/create", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/donation/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
