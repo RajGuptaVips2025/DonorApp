@@ -1,7 +1,7 @@
 # Donor & Donation Mini Module
 
 **Candidate:** Raj Gupta
-**Stack:** Next.js (App Router), Tailwind CSS,Shadcn ui, Prisma, PostgreSQL, bcryptjs, JWT, jose
+**Stack:** React, Node(Express.js), JavaScript, Tailwind CSS,Shadcn ui, PostgreSQL, bcryptjs, JWT
 
 ---
 
@@ -12,21 +12,26 @@
 
 ## What is included
 - Pixel-perfect responsive frontend (login, signup, profile, donation form)
-- Backend APIs (PostgreSQL + Prisma)
+- Backend APIs (PostgreSQL + Express.js)
 - Authentication (signup, login with JWT cookie)
 - Admin endpoints for reports
-- Postman collection: `postman/donor-donation.postman_collection.json`
-- ER Diagram: `docs/er-diagram.png`
-- Flow Diagram: `docs/flow-diagram.png`
+- Postman collection: `https://originalrjgupta2003-3356636.postman.co/workspace/gupta-rj's-Workspace~26293de9-9cee-446a-8911-0d4cf538a915/collection/50563367-b824674c-a82d-44be-a5e9-aa80c005057b?action=share&source=copy-link&creator=50563367`
 
-## Environment variables (.env)
-- ATABASE_URL=""
+## Backend Environment variables (.env)
+- PORT=""
+
+- DB_USER=""
+- DB_PASSWORD=""
+- DB_HOST=""
+- DB_NAME=""
+- DB_PORT=""
 - JWT_SECRET=""
+- JWT_EXPIRES_IN=""
 - NODE_ENV=""
+- CLIENT_URL=""
 
-## Environment variables (.env)
-- DATABASE_URL=""
-- JWT_SECRET=""
+## Frontend Environment variables (.env)
+- VITE_API_URL=""
 - NODE_ENV=""
 
 # 📡 API Endpoints
