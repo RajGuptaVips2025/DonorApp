@@ -19,7 +19,6 @@
 
 ## Backend Environment variables (.env)
 - PORT=""
-
 - DB_USER=""
 - DB_PASSWORD=""
 - DB_HOST=""
