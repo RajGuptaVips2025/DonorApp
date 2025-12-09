@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const authRoutes = require('./routes/authRoutes');
 const donationRoutes = require('./routes/donationRoutes');
+const adminRoutes = require('./routes/adminRoutes')
 const pool = require('./config/db');
 
 const app = express();
@@ -39,6 +40,7 @@ app.use(express.json());
 app.get('/', (req, res) => res.send('Auth API is running'));
 app.use('/api/donor', authRoutes);
 app.use('/api/donation', donationRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.get('/api/test', (req, res) => res.json({ message: 'Backend is connected' }));
 
