@@ -1,26 +1,12 @@
 import React from "react";
-
-const ImpactCard = ({ number, label, iconSrc, iconAlt }) => (
-  <div className="bg-green-50 rounded-[2.5rem] shadow-sm p-8 flex flex-col items-center text-center w-full h-full justify-center">
-    <span className="text-4xl font-bold text-[#2e9e5b] mb-4">
-      {number}
-    </span>
-
-    <div className="w-20 h-20 mb-4">
-      <img
-        src={iconSrc}
-        alt={iconAlt}
-        className="w-full h-full object-contain"
-      />
-    </div>
-
-    <p className="text-gray-800 font-medium text-xl">{label}</p>
-  </div>
-);
+import ImpactCard from "./ImpactCard";
 
 const Impact = () => {
   return (
-    <section className="relative py-20 font-sans text-white overflow-hidden bg-[#2e9e5b]">
+    <section
+      id="achievements"
+      className="relative py-20 font-sans text-white overflow-hidden bg-[#2e9e5b]"
+    >
       <div className="absolute inset-0 w-full h-full z-0">
         <img
           src="/Forest.jpg"
@@ -36,8 +22,7 @@ const Impact = () => {
             Our Impact In Bundelkhand
           </h2>
           <p className="text-green-50 text-lg md:text-xl max-w-3xl mx-auto drop-shadow-sm">
-            Every donation contributes to real, measurable progress on the
-            ground
+            Every donation contributes to real, measurable progress on the ground
           </p>
         </div>
 
@@ -84,3 +69,4 @@ const Impact = () => {
 };
 
 export default Impact;
+

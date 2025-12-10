@@ -1,15 +1,7 @@
 const pool = require("../config/db");
 
-/**
- * GET /admin/donors
- * Returns:
- *   - All donors
- *   - Each donor’s donation history
- *   - Total donated amount per donor
- */
 exports.getAllDonors = async (req, res) => {
   try {
-    // Fetch donors + aggregated totals
     const donorsQuery = await pool.query(`
       SELECT 
         u.uuid_id AS donor_id,
@@ -31,7 +23,6 @@ exports.getAllDonors = async (req, res) => {
       ORDER BY u.created_at DESC
     `);
 
-    // Fetch all donations grouped by donor
     const donationsQuery = await pool.query(`
       SELECT 
         donation_id,
@@ -47,14 +38,12 @@ exports.getAllDonors = async (req, res) => {
       ORDER BY created_at DESC
     `);
 
-    // Organize donations under each donor
     const donationsMap = {};
     donationsQuery.rows.forEach(d => {
       if (!donationsMap[d.donor_id]) donationsMap[d.donor_id] = [];
       donationsMap[d.donor_id].push(d);
     });
 
-    // Combine donor + donation history
     const donors = donorsQuery.rows.map(donor => ({
       ...donor,
       donations: donationsMap[donor.donor_id] || []
@@ -70,10 +59,6 @@ exports.getAllDonors = async (req, res) => {
   }
 };
 
-/**
- * GET /admin/donations/total
- * Returns total donation amount across the entire platform.
- */
 exports.getTotalDonations = async (req, res) => {
   try {
     const totalQuery = await pool.query(`

@@ -26,7 +26,7 @@ const contributionSteps = [
 
 const Contribution = () => {
   return (
-    <section className="py-16 bg-[#F0F7F0] font-sans">
+    <section id="contact" className="py-16 bg-[#F0F7F0] font-sans">
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative w-full h-[400px] lg:h-[500px] flex justify-center items-center">

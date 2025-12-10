@@ -2,7 +2,7 @@ import React from "react";
 
 const Mission = () => {
   return (
-    <section className="relative py-16 font-sans text-white overflow-hidden bg-gray-900">
+    <section id="bundelkhand" className="relative py-16 font-sans text-white overflow-hidden bg-gray-900">
       <div className="absolute inset-0 w-full h-full z-0">
         <img
           src="/Forest.jpg"

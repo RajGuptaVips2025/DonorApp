@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import {
   NavigationMenu,
@@ -15,6 +15,19 @@ import DonatePopup from "./DonatePopup";
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showDonatePopup, setShowDonatePopup] = useState(false);
+
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const isAuthPage = pathname === "/login" || pathname === "/signup";
+
+  const navLinks = [
+    { label: "Home", href: "/" }, 
+    { label: "About Us", href: "#about" },
+    { label: "Our CSR’s", href: "#csr" },
+    { label: "About Bundelkhand", href: "#bundelkhand" },
+    { label: "Achievements", href: "#achievements" },
+    { label: "Contact Us", href: "#contact" },
+  ];
 
   const toggleMenu = () => setIsMobileMenuOpen((s) => !s);
 
@@ -34,22 +47,40 @@ export default function Navbar() {
     return () => document.removeEventListener("click", closeOnOutsideClick);
   }, []);
 
-  const { pathname } = useLocation();
-  const isAuthPage = pathname === "/login" || pathname === "/signup";
+  const smoothScrollToId = (id) => {
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    const navHeight = document.querySelector("nav")?.offsetHeight || 80; 
+    const top = el.getBoundingClientRect().top + window.pageYOffset - navHeight - 8; 
+    window.scrollTo({ top, behavior: "smooth" });
+  };
 
-  const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "About Us", href: "#about" },
-    { label: "Our CSR’s", href: "#csr" },
-    { label: "About Bundelkhand", href: "#mission" },
-    { label: "Achievements", href: "#impact" },
-    { label: "Contact Us", href: "#contribution" },
-  ];
+  const handleNavClick = (href) => {
+    if (href === "/") {
+      if (pathname !== "/") {
+        navigate("/");
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      setIsMobileMenuOpen(false);
+      return;
+    }
+
+    const id = href.startsWith("#") ? href.slice(1) : href;
+
+    if (pathname !== "/") {
+      navigate("/", { state: { scrollTo: id } });
+    } else {
+      smoothScrollToId(id);
+    }
+
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <>
       <nav className="fixed top-0 left-0 w-full flex items-center justify-between px-6 py-3 bg-white/90 backdrop-blur-md shadow z-50">
-
         <Link to="/">
           <img
             src="/Deep Jasmine FOUNDATION 1.png"
@@ -64,12 +95,12 @@ export default function Navbar() {
               {navLinks.map((item) => (
                 <NavigationMenuItem key={item.label}>
                   <NavigationMenuLink asChild>
-                    <Link
-                      to={isAuthPage ? "/" : item.href}
-                      className="font-semibold cursor-pointer hover:text-green-100"
+                    <button
+                      onClick={() => handleNavClick(item.href)}
+                      className="font-semibold cursor-pointer hover:text-green-100 bg-transparent border-0"
                     >
                       {item.label}
-                    </Link>
+                    </button>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
@@ -105,6 +136,7 @@ export default function Navbar() {
         </button>
       </nav>
 
+      {/* overlay */}
       <div
         className={`fixed inset-0 z-[60] bg-black/50 transition-opacity duration-300 lg:hidden ${
           isMobileMenuOpen
@@ -114,6 +146,7 @@ export default function Navbar() {
         onClick={() => setIsMobileMenuOpen(false)}
       />
 
+      {/* mobile drawer */}
       <div
         className={`fixed top-0 right-0 z-[70] h-full w-[80%] max-w-sm bg-white shadow-2xl transform transition-transform lg:hidden ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
@@ -129,14 +162,13 @@ export default function Navbar() {
 
           <div className="flex flex-col gap-6">
             {navLinks.map((item) => (
-              <Link key={item.label} to={isAuthPage ? "/" : item.href}>
-                <span
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-medium text-gray-800 hover:text-green-600 border-b pb-2"
-                >
-                  {item.label}
-                </span>
-              </Link>
+              <button
+                key={item.label}
+                onClick={() => handleNavClick(item.href)}
+                className="text-lg font-medium text-gray-800 hover:text-green-600 border-b pb-2 text-left"
+              >
+                {item.label}
+              </button>
             ))}
           </div>
 
@@ -158,3 +190,11 @@ export default function Navbar() {
     </>
   );
 }
+
+
+
+
+
+
+
+

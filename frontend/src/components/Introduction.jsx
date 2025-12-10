@@ -2,7 +2,7 @@ import React from "react";
 
 const Introduction = () => {
   return (
-    <section className="relative w-full h-[500px] md:h-[600px] mt-12 overflow-hidden bg-gray-50 font-sans">
+    <section id="about" className="relative w-full h-[500px] md:h-[600px] mt-12 overflow-hidden bg-gray-50 font-sans">
       <div className="absolute inset-0 w-full h-full z-0">
         <div
           className="absolute inset-0 w-full h-full"
