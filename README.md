@@ -68,3 +68,20 @@
 
 ## ER Diagram
 ![ER Diagram](./frontend/public/bidaiER.png)
+
+---
+
+## Data Flow Diagram
+![ER Diagram](./frontend/public/bidaidfd.png)
+
+---
+
+## Future Improvements
+
+- Add real payment gateway (Razorpay/Stripe)
+- Add donor dashboard
+- Admin panel
+- Add validation using Zod
+- Email Validation in Authentication System
+- Use of better api integration technique for frontend
+- Remove the dependency on local storage for storing cookies.
