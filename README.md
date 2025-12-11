@@ -64,5 +64,7 @@
 | GET    | `/api/admin/donors`             | List donors + donations + total per donor |
 | GET    | `/api/admin/donations/total`    | Get total donation amount                 |
 
+---
 
+## ER Diagram
 ![ER Diagram](./frontend/public/bidaiER.png)
