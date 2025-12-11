@@ -65,4 +65,4 @@
 | GET    | `/api/admin/donations/total`    | Get total donation amount                 |
 
 
-
+![ER Diagram](./frontend/public/bidaiER.png)

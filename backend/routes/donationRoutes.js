@@ -9,5 +9,3 @@ router.post("/create", authMiddleware, createDonation);
 router.get("/:donorId", authMiddleware, getDonationsByDonor);
 
 module.exports = router;
-
-
